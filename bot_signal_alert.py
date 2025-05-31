@@ -1,3 +1,8 @@
+from dotenv import load_dotenv
+
+# โหลดค่าจาก .env เข้าไปใน environment
+load_dotenv()
+
 import time
 import requests
 import json
@@ -23,8 +28,8 @@ TRADING_PAIRS = [
     "TNSRUSDT", "TRBUSDT", "TRUMPUSDT", "TRXUSDT", "UNIUSDT", "VETUSDT", "VIRTUALUSDT", "WCTUSDT", "WIFUSDT", "WLDUSDT", "XLMUSDT", "XRPUSDT", "ZECUSDT", "ZKUSDT", "ZROUSDT"
 ]
 
-WEBHOOK_URL_EMA = 'https://discord.com/api/webhooks/1367862087501742090/ik_wk74Ioy8jZ5_WPIV0Lh-rWKIQrmWmWvyr6BecQd9Qq9aeXgiL--uguZIKp3MqBeG1'
-WEBHOOK_URL_RSI = 'https://discord.com/api/webhooks/1377613560582242304/3-b92P97EWU00a76Q51WUG7vNxi29QD39byHDg9npiB4HKG552xzC59zDwguBcgtBkQd'
+WEBHOOK_URL_EMA = os.getenv("WEBHOOK_URL_EMA")
+WEBHOOK_URL_RSI = os.getenv("WEBHOOK_URL_RSI")
 
 STATE_FILE = 'ema_state.json'
 
