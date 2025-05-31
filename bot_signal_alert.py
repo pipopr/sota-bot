@@ -1,8 +1,4 @@
 from dotenv import load_dotenv
-
-# โหลดค่าจาก .env เข้าไปใน environment
-load_dotenv()
-
 import time
 import requests
 import json
@@ -10,8 +6,16 @@ from datetime import datetime
 from binance.client import Client
 import os
 
-client = Client()
+# โหลดค่าใน .env
+load_dotenv()
 
+# สร้าง Binance Client ด้วย API Key/Secret จาก .env
+client = Client(
+    os.getenv("BINANCE_API_KEY"),
+    os.getenv("BINANCE_API_SECRET")
+)
+
+# รายการคู่เทรดที่ใช้ตรวจสอบ (ต้องเป็นรูปแบบ Binance symbol)
 TRADING_PAIRS = [
     "AUSDT", "AAVEUSDT", "ADAUSDT", "AIXBTUSDT", "ALGOUSDT", "APTUSDT", "ARBUSDT",
     "ARKMUSDT", "ATOMUSDT", "AXSUSDT", "AVAXUSDT", "BCHUSDT", "BERAUSDT", "BIOUSDT", "BNBUSDT",
@@ -45,7 +49,7 @@ def save_state(state):
 
 def fetch_price_data(symbol):
     klines = client.get_klines(symbol=symbol, interval='4h', limit=100)
-    return [float(kline[4]) for kline in klines]
+    return [float(kline[4]) for kline in klines]  # ราคาปิดแท่งเทียน
 
 def calculate_ema(prices, period):
     k = 2 / (period + 1)
@@ -71,12 +75,12 @@ def calculate_rsi(prices, period=14):
     return 100 - (100 / (1 + rs))
 
 def send_discord_alert(strategy, pair, price, event, timestamp, signal_type):
-    import locale
-    locale.setlocale(locale.LC_ALL, '')
     color = 0x00FF00 if signal_type == "BUY" else 0xFF0000
     emoji = "🟢" if signal_type == "BUY" else "🔴"
     webhook_url = WEBHOOK_URL_EMA if strategy == "ema" else WEBHOOK_URL_RSI
     display_pair = pair.replace("USDT", "/USDT")
+
+    # Format ราคาตามขนาด
     if price >= 100:
         formatted_price = f"{price:,.2f}"
     elif price >= 10:
@@ -87,6 +91,7 @@ def send_discord_alert(strategy, pair, price, event, timestamp, signal_type):
         formatted_price = f"{price:,.5f}"
     else:
         formatted_price = f"{price:,.6f}"
+
     label_width = 12
     description = (
         f"**{'SIGNAL'.ljust(label_width)}**: {signal_type} {emoji}\n"
@@ -101,7 +106,11 @@ def send_discord_alert(strategy, pair, price, event, timestamp, signal_type):
         "color": color,
         "footer": {"text": "Signal by Sota"}
     }
-    requests.post(webhook_url, json={"embeds": [embed]})
+    try:
+        response = requests.post(webhook_url, json={"embeds": [embed]})
+        response.raise_for_status()
+    except Exception as e:
+        print(f"❌ Failed to send alert for {pair} ({strategy}): {e}")
 
 def check_signals():
     state = load_state()
@@ -113,17 +122,16 @@ def check_signals():
             last_price = prices[-1]
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M GMT+7')
 
-            # EMA: check last state to prevent duplicates
+            # EMA logic + state prevent duplicate alert
             prev_ema_state = state.get(pair, "")
             current_ema_state = "buy" if ema12 > ema26 else "sell"
-
             if current_ema_state != prev_ema_state:
                 signal = "BUY" if current_ema_state == "buy" else "SELL"
                 event = f"EMA12 {'>' if signal == 'BUY' else '<'} EMA26 (TF: 4H)"
                 send_discord_alert("ema", pair, last_price, event, timestamp, signal)
-                state[pair] = current_ema_state  # update state
+                state[pair] = current_ema_state
 
-            # RSI alert every time RSI ≤ 30
+            # RSI alert ทุกครั้งถ้า RSI <= 30 (ไม่ลดแจ้งเตือน)
             rsi = calculate_rsi(prices)
             if rsi is not None and rsi <= 30:
                 send_discord_alert("rsi", pair, last_price, f"RSI = {rsi:.2f} (TF: 4H)", timestamp, "BUY")
@@ -134,4 +142,8 @@ def check_signals():
     save_state(state)
 
 if __name__ == "__main__":
-    check_signals()
+    print("🚀 Starting trading signal bot...")
+    while True:
+        check_signals()
+        print(f"⏰ Checked all pairs at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}, sleeping 4 hours...")
+        time.sleep(4 * 60 * 60)  # รอ 4 ชั่วโมง

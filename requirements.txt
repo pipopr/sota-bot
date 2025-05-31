@@ -1,3 +1,5 @@
-python-binance
-requests
 python-dotenv
+pandas
+requests
+discord.py
+python-binance
