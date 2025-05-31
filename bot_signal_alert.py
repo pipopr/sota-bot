@@ -3,6 +3,7 @@ import time
 import requests
 import json
 from datetime import datetime
+import zoneinfo  # Python 3.9+
 from binance.client import Client
 import os
 
@@ -120,7 +121,8 @@ def check_signals():
             ema12 = calculate_ema(prices[-26:], 12)
             ema26 = calculate_ema(prices[-26:], 26)
             last_price = prices[-1]
-            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M GMT+7')
+            tz = zoneinfo.ZoneInfo("Asia/Bangkok")
+            timestamp = datetime.now(tz).strftime('%Y-%m-%d %H:%M GMT+7')
 
             # EMA logic + state prevent duplicate alert
             prev_ema_state = state.get(pair, "")
