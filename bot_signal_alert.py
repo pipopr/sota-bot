@@ -2,15 +2,14 @@ from dotenv import load_dotenv
 import time
 import requests
 import json
-from datetime import datetime
-import zoneinfo  # Python 3.9+
+from datetime import datetime, timedelta
+import zoneinfo
 from binance.client import Client
 import os
 
-# โหลดค่าใน .env
+# Load .env
 load_dotenv()
 
-# สร้าง Binance Client ด้วย API Key/Secret จาก .env
 client = Client(
     os.getenv("BINANCE_API_KEY"),
     os.getenv("BINANCE_API_SECRET")
@@ -37,6 +36,7 @@ WEBHOOK_URL_EMA = os.getenv("WEBHOOK_URL_EMA")
 WEBHOOK_URL_RSI = os.getenv("WEBHOOK_URL_RSI")
 
 STATE_FILE = 'ema_state.json'
+TIMEFRAME_HOURS = 4  # ใช้กับ EMA เท่านั้น
 
 def load_state():
     if os.path.exists(STATE_FILE):
@@ -46,11 +46,11 @@ def load_state():
 
 def save_state(state):
     with open(STATE_FILE, 'w') as f:
-        json.dump(state, f)
+        json.dump(state, f, indent=2)
 
 def fetch_price_data(symbol):
     klines = client.get_klines(symbol=symbol, interval='4h', limit=100)
-    return [float(kline[4]) for kline in klines]  # ราคาปิดแท่งเทียน
+    return [float(kline[4]) for kline in klines]
 
 def calculate_ema(prices, period):
     k = 2 / (period + 1)
@@ -81,7 +81,6 @@ def send_discord_alert(strategy, pair, price, event, timestamp, signal_type):
     webhook_url = WEBHOOK_URL_EMA if strategy == "ema" else WEBHOOK_URL_RSI
     display_pair = pair.replace("USDT", "/USDT")
 
-    # Format ราคาตามขนาด
     if price >= 100:
         formatted_price = f"{price:,.2f}"
     elif price >= 10:
@@ -95,14 +94,16 @@ def send_discord_alert(strategy, pair, price, event, timestamp, signal_type):
 
     label_width = 12
     description = (
-        f"**{'SIGNAL'.ljust(label_width)}**: {signal_type} {emoji}\n"
-        f"**{'PAIR'.ljust(label_width)}**: {display_pair}\n"
-        f"**{'PRICE'.ljust(label_width)}**: {formatted_price} USDT\n"
-        f"**{'EVENT'.ljust(label_width)}**: {event}\n"
-        f"**{'TIMESTAMP'.ljust(label_width)}**: {timestamp}"
+        f"```\n"
+        f"{'SIGNAL'.ljust(label_width)}: {signal_type} {emoji}\n"
+        f"{'PAIR'.ljust(label_width)}: {display_pair}\n"
+        f"{'PRICE'.ljust(label_width)}: {formatted_price} USDT\n"
+        f"{'EVENT'.ljust(label_width)}: {event}\n"
+        f"{'TIMESTAMP'.ljust(label_width)}: {timestamp}\n"
+        f"```"
     )
     embed = {
-        "title": "📈 EMA Crossover Signal" if strategy == "ema" else "📉 RSI Strategy Signal",
+        "title": "\ud83d\udcc8 EMA Crossover Signal" if strategy == "ema" else "\ud83d\udcc9 RSI Strategy Signal",
         "description": description,
         "color": color,
         "footer": {"text": "Signal by Sota"}
@@ -111,35 +112,48 @@ def send_discord_alert(strategy, pair, price, event, timestamp, signal_type):
         response = requests.post(webhook_url, json={"embeds": [embed]})
         response.raise_for_status()
     except Exception as e:
-        print(f"❌ Failed to send alert for {pair} ({strategy}): {e}")
+        print(f"\u274c Failed to send alert for {pair} ({strategy}): {e}")
 
 def check_signals():
     state = load_state()
+    tz = zoneinfo.ZoneInfo("Asia/Bangkok")
+    now = datetime.now(tz)
+    now_str = now.strftime('%Y-%m-%d %H:%M GMT+7')
+
     for pair in TRADING_PAIRS:
         try:
             prices = fetch_price_data(pair)
             ema12 = calculate_ema(prices[-26:], 12)
             ema26 = calculate_ema(prices[-26:], 26)
             last_price = prices[-1]
-            tz = zoneinfo.ZoneInfo("Asia/Bangkok")
-            timestamp = datetime.now(tz).strftime('%Y-%m-%d %H:%M GMT+7')
 
-            # EMA logic + state prevent duplicate alert
-            prev_ema_state = state.get(pair, "")
-            current_ema_state = "buy" if ema12 > ema26 else "sell"
-            if current_ema_state != prev_ema_state:
-                signal = "BUY" if current_ema_state == "buy" else "SELL"
-                event = f"EMA12 {'>' if signal == 'BUY' else '<'} EMA26 (TF: 4H)"
-                send_discord_alert("ema", pair, last_price, event, timestamp, signal)
-                state[pair] = current_ema_state
+            prev_state = state.get(pair, {})
+            if not isinstance(prev_state, dict):
+                prev_state = {}
+            prev_signal = prev_state.get("signal")
+            prev_sent = prev_state.get("last_sent_at")
+            current_signal = "buy" if ema12 > ema26 else "sell"
 
-            # RSI alert ทุกครั้งถ้า RSI <= 30 (ไม่ลดแจ้งเตือน)
+            prev_sent_dt = datetime.fromisoformat(prev_sent) if prev_sent else None
+
+            if current_signal != prev_signal or not prev_sent_dt or (now - prev_sent_dt > timedelta(hours=TIMEFRAME_HOURS)):
+                signal_type = "BUY" if current_signal == "buy" else "SELL"
+                event = f"EMA12 {'>' if signal_type == 'BUY' else '<'} EMA26 (TF: 4H)"
+                send_discord_alert("ema", pair, last_price, event, now_str, signal_type)
+                time.sleep(1)  # หน่วง 1 วิ
+
+                state[pair] = {
+                    "signal": current_signal,
+                    "last_sent_at": now.isoformat()
+                }
+
             rsi = calculate_rsi(prices)
             if rsi is not None and rsi <= 30:
-                send_discord_alert("rsi", pair, last_price, f"RSI = {rsi:.2f} (TF: 4H)", timestamp, "BUY")
+                send_discord_alert("rsi", pair, last_price, f"RSI = {rsi:.2f} (TF: 4H)", now_str, "BUY")
+                time.sleep(1)  # หน่วง 1 วิ
 
         except Exception as e:
-            print(f"❌ Error checking {pair}: {e}")
+            print(f"\u274c Error checking {pair}: {e}")
 
     save_state(state)
 
@@ -148,10 +162,6 @@ if __name__ == "__main__":
     while True:
         start_time = time.time()
         check_signals()
-        end_time = time.time()
-
-        elapsed_time = end_time - start_time
-        sleep_time = max(0, (4 * 60 * 60) - elapsed_time)  # 4 ชั่วโมงลบเวลาที่ใช้ไป
-
-        print(f"⏰ Checked all pairs at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}, took {elapsed_time:.2f}s, sleeping {sleep_time:.2f}s...")
+        elapsed_time = time.time() - start_time
+        sleep_time = max(0, 4 * 60 * 60 - elapsed_time)  # 4 ชั่วโมง
         time.sleep(sleep_time)
