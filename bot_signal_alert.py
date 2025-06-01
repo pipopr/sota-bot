@@ -176,9 +176,13 @@ if __name__ == "__main__":
 
     while True:
         now = datetime.now(tz)
-        next_run_hour = ((now.hour // 4) + 1) * 4
+
+        # หาชั่วโมงถัดไปที่เป็น 03, 07, 11, 15, 19, 23
+        # โดยเอา (ชั่วโมงปัจจุบัน - 3) หารด้วย 4 แล้ว +1 เพื่อไปชั่วโมงถัดไป
+        next_run_hour = (((now.hour - 3) // 4) + 1) * 4 + 3
+
         if next_run_hour >= 24:
-            next_run = datetime(now.year, now.month, now.day, 0, 0, 0, tzinfo=tz) + timedelta(days=1)
+            next_run = datetime(now.year, now.month, now.day, 3, 0, 0, tzinfo=tz) + timedelta(days=1)
         else:
             next_run = datetime(now.year, now.month, now.day, next_run_hour, 0, 0, tzinfo=tz)
 
@@ -187,3 +191,4 @@ if __name__ == "__main__":
         time.sleep(wait_seconds)
 
         check_signals()
+
