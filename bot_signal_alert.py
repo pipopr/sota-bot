@@ -132,13 +132,9 @@ def check_signals():
                 prev_state = {}
 
             prev_signal = prev_state.get("signal")  # buy หรือ sell หรือ None
-            prev_sent = prev_state.get("last_sent_at")  # timestamp string หรือ None
             current_signal = "buy" if ema12 > ema26 else "sell"
 
-            prev_sent_dt = datetime.fromisoformat(prev_sent) if prev_sent else None
-
-            # เงื่อนไขส่ง alert
-            # ส่ง alert ก็ต่อเมื่อสัญญาณเปลี่ยนจาก buy->sell หรือ sell->buy หรือ ยังไม่เคยส่ง alert มาก่อน
+            # EMA แจ้งแค่ตอนเปลี่ยนสัญญาณ
             if current_signal != prev_signal:
                 signal_type = "BUY" if current_signal == "buy" else "SELL"
                 event = f"EMA12 {'>' if signal_type == 'BUY' else '<'} EMA26 (TF: 4H)"
@@ -151,29 +147,19 @@ def check_signals():
                     "last_sent_at": now.isoformat()
                 }
             else:
-                # ไม่ส่ง alert ซ้ำถ้า signal เดิมยังอยู่
-                # แต่ถ้า pair นี้ยังไม่มีใน state เก็บไว้ (ครั้งแรกที่รัน)
                 if pair not in state:
                     state[pair] = {
                         "signal": current_signal,
                         "last_sent_at": None
                     }
 
-            # RSI แจ้งเตือนเฉพาะตอน RSI <= 30 (ซื้อ)
+            # RSI แจ้งเตือนทุกครั้งถ้า RSI <= 30
             rsi = calculate_rsi(prices)
             if rsi is not None and rsi <= 30:
-                # เช็คว่ารอบก่อนๆ เราส่ง RSI buy alert ไหม ถ้าไม่ส่งก็ส่ง (จะได้ไม่แจ้งซ้ำ)
-                prev_rsi_alert = prev_state.get("rsi_alert_sent", False)
-                if not prev_rsi_alert:
-                    send_discord_alert("rsi", pair, last_price, f"RSI = {rsi:.2f} (TF: 4H)", now_str, "BUY")
-                    time.sleep(1)  # หน่วง 1 วิ
+                send_discord_alert("rsi", pair, last_price, f"RSI = {rsi:.2f} (TF: 4H)", now_str, "BUY")
+                time.sleep(1)  # หน่วง 1 วิ
 
-                    # บันทึกสถานะ RSI ว่าส่ง alert แล้ว
-                    state[pair]["rsi_alert_sent"] = True
-            else:
-                # ถ้า RSI > 30 ให้ reset สถานะ alert
-                if pair in state:
-                    state[pair]["rsi_alert_sent"] = False
+            # ถ้า RSI > 30 ไม่ต้องทำอะไร (ไม่ต้องเก็บสถานะ)
 
         except Exception as e:
             print(f"\u274c Error checking {pair}: {e}")
