@@ -1,430 +1,537 @@
 {
   "AUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": true
   },
   "AAVEUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "ADAUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "AIXBTUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "ALGOUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "APTUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "ARBUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "ARKMUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "ATOMUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "AXSUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "AVAXUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "BCHUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "BERAUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "BIOUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "BNBUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "BONKUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "BTCUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "BTTCUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "CAKEUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "CETUSUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "COOKIEUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "CRVUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "CVXUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": true
   },
   "DEXEUSDT": {
     "signal": "buy",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "DOGEUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": true
   },
   "DOTUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "EIGENUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "ENAUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "ENSUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "ETCUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "ETHUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "ETHFIUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "FETUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "FLOKIUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "FLOWUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "FORMUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "GALAUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "GRTUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "HBARUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "HUMAUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": true
   },
   "ICPUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "IMXUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "INITUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "INJUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "IOTAUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "JASMYUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "JTOUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "JUPUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "KAIAUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "KAITOUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "KERNELUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "LDOUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "LTCUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "LINKUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "MASKUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "MKRUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "MEUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "MOVEUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "NEARUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "NEIROUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "NEOUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "NEXOUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "NILUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "NOTUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "ONDOUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "OPUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "ORCAUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "PAXGUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "PENDLEUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "PENGUUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "PEPEUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "POLUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "PNUTUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "PYTHUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "QNTUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "RAYUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "RENDERUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "RUNEUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "SUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "SANDUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "SEIUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "SHIBUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "SOLUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": true
   },
   "SOPHUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "SSVUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "STORJUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": true
   },
   "STXUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "SUIUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "TAOUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "THETAUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "TIAUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "TONUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "TNSRUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "TRBUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "TRUMPUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "TRXUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "UNIUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "VETUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "VIRTUALUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "WCTUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "WIFUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": true
   },
   "WLDUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": true
   },
   "XLMUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "XRPUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "ZECUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "ZKUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": false
   },
   "ZROUSDT": {
     "signal": "sell",
-    "last_sent_at": "2025-06-01T14:01:06.048713+07:00"
+    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
+    "rsi_alert_sent": true
   }
 }

@@ -15,7 +15,6 @@ client = Client(
     os.getenv("BINANCE_API_SECRET")
 )
 
-# รายการคู่เทรดที่ใช้ตรวจสอบ (ต้องเป็นรูปแบบ Binance symbol)
 TRADING_PAIRS = [
     "AUSDT", "AAVEUSDT", "ADAUSDT", "AIXBTUSDT", "ALGOUSDT", "APTUSDT", "ARBUSDT",
     "ARKMUSDT", "ATOMUSDT", "AXSUSDT", "AVAXUSDT", "BCHUSDT", "BERAUSDT", "BIOUSDT", "BNBUSDT",
@@ -36,7 +35,7 @@ WEBHOOK_URL_EMA = os.getenv("WEBHOOK_URL_EMA")
 WEBHOOK_URL_RSI = os.getenv("WEBHOOK_URL_RSI")
 
 STATE_FILE = 'ema_state.json'
-TIMEFRAME_HOURS = 4  # ใช้กับ EMA เท่านั้น
+TIMEFRAME_HOURS = 4  # เวลาที่ใช้ใน EMA และการรัน
 
 def load_state():
     if os.path.exists(STATE_FILE):
@@ -123,6 +122,7 @@ def check_signals():
     for pair in TRADING_PAIRS:
         try:
             prices = fetch_price_data(pair)
+            # คำนวณ EMA
             ema12 = calculate_ema(prices[-26:], 12)
             ema26 = calculate_ema(prices[-26:], 26)
             last_price = prices[-1]
@@ -130,27 +130,50 @@ def check_signals():
             prev_state = state.get(pair, {})
             if not isinstance(prev_state, dict):
                 prev_state = {}
-            prev_signal = prev_state.get("signal")
-            prev_sent = prev_state.get("last_sent_at")
+
+            prev_signal = prev_state.get("signal")  # buy หรือ sell หรือ None
+            prev_sent = prev_state.get("last_sent_at")  # timestamp string หรือ None
             current_signal = "buy" if ema12 > ema26 else "sell"
 
             prev_sent_dt = datetime.fromisoformat(prev_sent) if prev_sent else None
 
-            if current_signal != prev_signal or not prev_sent_dt or (now - prev_sent_dt > timedelta(hours=TIMEFRAME_HOURS)):
+            # เงื่อนไขส่ง alert
+            # ส่ง alert ก็ต่อเมื่อสัญญาณเปลี่ยนจาก buy->sell หรือ sell->buy หรือ ยังไม่เคยส่ง alert มาก่อน
+            if current_signal != prev_signal:
                 signal_type = "BUY" if current_signal == "buy" else "SELL"
                 event = f"EMA12 {'>' if signal_type == 'BUY' else '<'} EMA26 (TF: 4H)"
                 send_discord_alert("ema", pair, last_price, event, now_str, signal_type)
                 time.sleep(1)  # หน่วง 1 วิ
 
+                # อัปเดตสถานะเก็บไว้
                 state[pair] = {
                     "signal": current_signal,
                     "last_sent_at": now.isoformat()
                 }
+            else:
+                # ไม่ส่ง alert ซ้ำถ้า signal เดิมยังอยู่
+                # แต่ถ้า pair นี้ยังไม่มีใน state เก็บไว้ (ครั้งแรกที่รัน)
+                if pair not in state:
+                    state[pair] = {
+                        "signal": current_signal,
+                        "last_sent_at": None
+                    }
 
+            # RSI แจ้งเตือนเฉพาะตอน RSI <= 30 (ซื้อ)
             rsi = calculate_rsi(prices)
             if rsi is not None and rsi <= 30:
-                send_discord_alert("rsi", pair, last_price, f"RSI = {rsi:.2f} (TF: 4H)", now_str, "BUY")
-                time.sleep(1)  # หน่วง 1 วิ
+                # เช็คว่ารอบก่อนๆ เราส่ง RSI buy alert ไหม ถ้าไม่ส่งก็ส่ง (จะได้ไม่แจ้งซ้ำ)
+                prev_rsi_alert = prev_state.get("rsi_alert_sent", False)
+                if not prev_rsi_alert:
+                    send_discord_alert("rsi", pair, last_price, f"RSI = {rsi:.2f} (TF: 4H)", now_str, "BUY")
+                    time.sleep(1)  # หน่วง 1 วิ
+
+                    # บันทึกสถานะ RSI ว่าส่ง alert แล้ว
+                    state[pair]["rsi_alert_sent"] = True
+            else:
+                # ถ้า RSI > 30 ให้ reset สถานะ alert
+                if pair in state:
+                    state[pair]["rsi_alert_sent"] = False
 
         except Exception as e:
             print(f"\u274c Error checking {pair}: {e}")
@@ -159,9 +182,22 @@ def check_signals():
 
 if __name__ == "__main__":
     print("🚀 Starting trading signal bot...")
+
+    tz = zoneinfo.ZoneInfo("Asia/Bangkok")
+
+    # รันครั้งแรก
+    check_signals()
+
     while True:
-        start_time = time.time()
+        now = datetime.now(tz)
+        next_run_hour = ((now.hour // 4) + 1) * 4
+        if next_run_hour >= 24:
+            next_run = datetime(now.year, now.month, now.day, 0, 0, 0, tzinfo=tz) + timedelta(days=1)
+        else:
+            next_run = datetime(now.year, now.month, now.day, next_run_hour, 0, 0, tzinfo=tz)
+
+        wait_seconds = (next_run - now).total_seconds()
+        print(f"🕒 Next run at {next_run.strftime('%Y-%m-%d %H:%M:%S %Z')}, sleeping for {int(wait_seconds)} seconds...")
+        time.sleep(wait_seconds)
+
         check_signals()
-        elapsed_time = time.time() - start_time
-        sleep_time = max(0, 4 * 60 * 60 - elapsed_time)  # 4 ชั่วโมง
-        time.sleep(sleep_time)
