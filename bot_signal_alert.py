@@ -29,7 +29,7 @@ TRADING_PAIRS = [
     "NEOUSDT", "NEXOUSDT", "NILUSDT", "NOTUSDT", "ONDOUSDT", "OPUSDT", "ORCAUSDT", "PAXGUSDT",
     "PENDLEUSDT", "PENGUUSDT", "PEPEUSDT", "POLUSDT", "PNUTUSDT", "PYTHUSDT", "QNTUSDT",
     "RAYUSDT", "RENDERUSDT", "RUNEUSDT", "SUSDT", "SANDUSDT", "SEIUSDT", "SHIBUSDT", "SOLUSDT",
-    "SOPHUSDT", "SSVUSDT", "STXUSDT", "SUIUSDT", "TAOUSDT", "THETAUSDT", "TIAUSDT", "TONUSDT",
+    "SOPHUSDT", "SSVUSDT", "STORJUSDT", "STXUSDT", "SUIUSDT", "TAOUSDT", "THETAUSDT", "TIAUSDT", "TONUSDT",
     "TNSRUSDT", "TRBUSDT", "TRUMPUSDT", "TRXUSDT", "UNIUSDT", "VETUSDT", "VIRTUALUSDT", "WCTUSDT", "WIFUSDT", "WLDUSDT", "XLMUSDT", "XRPUSDT", "ZECUSDT", "ZKUSDT", "ZROUSDT"
 ]
 
@@ -146,6 +146,12 @@ def check_signals():
 if __name__ == "__main__":
     print("🚀 Starting trading signal bot...")
     while True:
+        start_time = time.time()
         check_signals()
-        print(f"⏰ Checked all pairs at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}, sleeping 4 hours...")
-        time.sleep(4 * 60 * 60)  # รอ 4 ชั่วโมง
+        end_time = time.time()
+
+        elapsed_time = end_time - start_time
+        sleep_time = max(0, (4 * 60 * 60) - elapsed_time)  # 4 ชั่วโมงลบเวลาที่ใช้ไป
+
+        print(f"⏰ Checked all pairs at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}, took {elapsed_time:.2f}s, sleeping {sleep_time:.2f}s...")
+        time.sleep(sleep_time)
