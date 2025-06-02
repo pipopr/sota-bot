@@ -100,9 +100,8 @@
     "rsi_alert_sent": false
   },
   "COOKIEUSDT": {
-    "signal": "sell",
-    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
-    "rsi_alert_sent": false
+    "signal": "buy",
+    "last_sent_at": "2025-06-02T19:22:39.191323+07:00"
   },
   "CRVUSDT": {
     "signal": "sell",
@@ -270,9 +269,8 @@
     "rsi_alert_sent": false
   },
   "MASKUSDT": {
-    "signal": "sell",
-    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
-    "rsi_alert_sent": false
+    "signal": "buy",
+    "last_sent_at": "2025-06-02T19:22:39.191323+07:00"
   },
   "MKRUSDT": {
     "signal": "sell",
@@ -335,9 +333,8 @@
     "rsi_alert_sent": false
   },
   "PAXGUSDT": {
-    "signal": "sell",
-    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
-    "rsi_alert_sent": false
+    "signal": "buy",
+    "last_sent_at": "2025-06-02T19:22:39.191323+07:00"
   },
   "PENDLEUSDT": {
     "signal": "sell",
@@ -520,9 +517,8 @@
     "rsi_alert_sent": false
   },
   "ZECUSDT": {
-    "signal": "sell",
-    "last_sent_at": "2025-06-01T19:21:19.489350+07:00",
-    "rsi_alert_sent": false
+    "signal": "buy",
+    "last_sent_at": "2025-06-02T19:22:39.191323+07:00"
   },
   "ZKUSDT": {
     "signal": "sell",
