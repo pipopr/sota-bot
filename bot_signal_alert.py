@@ -127,18 +127,30 @@ def check_signals():
     for pair in TRADING_PAIRS:
         try:
             prices = fetch_price_data(pair)
-            ema12 = calculate_ema(prices[-26:], 12)
-            ema26 = calculate_ema(prices[-26:], 26)
+            ema12_prev = calculate_ema(prices[-27:-1], 12)
+            ema26_prev = calculate_ema(prices[-27:-1], 26)
+            ema12_now = calculate_ema(prices[-26:], 12)
+            ema26_now = calculate_ema(prices[-26:], 26)
             last_price = prices[-1]
 
             prev_state = state.get(pair, {}) if isinstance(state.get(pair), dict) else {}
             prev_signal = prev_state.get("signal")
 
             # เพิ่มเงื่อนไข confirm ด้วยราคาปิดล่าสุด
-            if ema12 > ema26 and last_price > ema12 and last_price > ema26:
+            if (
+                ema12_prev < ema26_prev and  # ก่อนหน้า EMA12 ยังต่ำกว่า
+                ema12_now > ema26_now and    # ตอนนี้ EMA12 ขึ้นมาเหนือ EMA26
+                last_price > ema12_now and last_price > ema26_now  # Confirm โดยราคาปิด
+            ):
                 current_signal = "buy"
-            elif ema12 < ema26 and last_price < ema12 and last_price < ema26:
+
+            elif (
+                ema12_prev > ema26_prev and
+                ema12_now < ema26_now and
+                last_price < ema12_now and last_price < ema26_now
+            ):
                 current_signal = "sell"
+
             else:
                 current_signal = prev_signal  # ไม่เปลี่ยนสัญญาณถ้าไม่ผ่านเงื่อนไข
 

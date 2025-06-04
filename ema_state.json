@@ -100,8 +100,8 @@
     "rsi_alert_sent": false
   },
   "COOKIEUSDT": {
-    "signal": "buy",
-    "last_sent_at": "2025-06-02T19:22:39.191323+07:00"
+    "signal": "sell",
+    "last_sent_at": "2025-06-04T22:34:58.562873+07:00"
   },
   "CRVUSDT": {
     "signal": "sell",
