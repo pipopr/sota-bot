@@ -62,6 +62,11 @@ def calculate_ema(prices, period):
         ema = (price * k) + (ema * (1 - k))
     return ema
 
+def calculate_sma(prices, period):
+    if len(prices) < period:
+        return None
+    return sum(prices[-period:]) / period
+
 def calculate_rsi(prices, period=14):
     if len(prices) < period + 1:
         return None
@@ -127,43 +132,34 @@ def check_signals():
     for pair in TRADING_PAIRS:
         try:
             prices = fetch_price_data(pair)
-            ema12_prev = calculate_ema(prices[-27:-1], 12)
-            ema26_prev = calculate_ema(prices[-27:-1], 26)
-            ema12_now = calculate_ema(prices[-26:], 12)
-            ema26_now = calculate_ema(prices[-26:], 26)
             last_price = prices[-1]
+            sma99 = calculate_sma(prices, 99)
+
+            if sma99 is None:
+                continue  # รอให้ข้อมูลเพียงพอ
 
             prev_state = state.get(pair, {}) if isinstance(state.get(pair), dict) else {}
             prev_signal = prev_state.get("signal")
 
-            # เพิ่มเงื่อนไข confirm ด้วยราคาปิดล่าสุด
-            if (
-                ema12_prev < ema26_prev and  # ก่อนหน้า EMA12 ยังต่ำกว่า
-                ema12_now > ema26_now and    # ตอนนี้ EMA12 ขึ้นมาเหนือ EMA26
-                last_price > ema12_now and last_price > ema26_now  # Confirm โดยราคาปิด
-            ):
+            if last_price > sma99:
                 current_signal = "buy"
-
-            elif (
-                ema12_prev > ema26_prev and
-                ema12_now < ema26_now and
-                last_price < ema12_now and last_price < ema26_now
-            ):
+            elif last_price < sma99:
                 current_signal = "sell"
-
             else:
-                current_signal = prev_signal  # ไม่เปลี่ยนสัญญาณถ้าไม่ผ่านเงื่อนไข
+                current_signal = prev_signal  # ไม่เปลี่ยนสัญญาณถ้าเท่ากัน
+
+            print(f"✅ {pair} - Price: {last_price:.6f}, SMA99: {sma99:.6f}, Signal: {current_signal}")
 
             if current_signal != prev_signal:
                 signal_type = "BUY" if current_signal == "buy" else "SELL"
-                event = f"EMA12 {'>' if signal_type == 'BUY' else '<'} EMA26 (TF: 4H) + Confirm by Close Price"
+                event = f"Close {'>' if signal_type == 'BUY' else '<'} SMA99 (TF: 4H)"
                 send_discord_alert("ema", pair, last_price, event, now_str, signal_type)
                 time.sleep(1)
                 state[pair] = {"signal": current_signal, "last_sent_at": now.isoformat()}
             elif pair not in state:
                 state[pair] = {"signal": current_signal, "last_sent_at": None}
 
-            # RSI logic ไม่เปลี่ยน
+            # RSI ยังเหมือนเดิม
             rsi = calculate_rsi(prices)
             if rsi is not None and rsi <= 30:
                 send_discord_alert("rsi", pair, last_price, f"RSI = {rsi:.2f} (TF: 4H)", now_str, "BUY")
@@ -173,6 +169,7 @@ def check_signals():
             print(f"❌ Error checking {pair}: {e}")
 
     save_state(state)
+
 
 # --- Scheduling ---
 def get_next_run_time(now):
